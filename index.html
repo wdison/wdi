@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Speech</title>
+</head>
+<body>
+	<div class="container">
+		<input id="textToSpeech" type="text" name="conteudo" 
+            value="Cobertura jornalística abrangente e atualizada, agregada de fontes do mundo inteiro pelo Google Notícias." size="70" />
+		<div id="speechPlayer"></div>
+	</div>
+
+	<script type="text/javascript" src="src/wdi.speech.js"></script>
+	<script type="text/javascript">
+		(function(window) {
+			window.onload = function() {
+				var text = document.getElementById('textToSpeech').value;
+				var speech = wdi.Speech({'id':'speechPlayer','text':text});
+				setTimeout(function(){
+		            speech.play();
+		        }, 3000);
+			};
+		})(this||{});
+	</script>
+</body>
+</html>
