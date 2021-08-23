@@ -51,6 +51,7 @@
             config: undefined
         }
 
+
         elementsCtrl.progress.addEventListener('change', wdiSpeechProgressChange);
         elementsCtrl.menuConf.addEventListener('click', wdiSpeechMenuConfClick);
 
@@ -169,7 +170,7 @@
                     }, 50);
                 }
             };
-            
+
             return msgConfig;
         }
 
@@ -230,7 +231,7 @@
                 }
         }
 
-        
+        return speechCtrl;
     }
 
     function createElement(elCreateConf){
@@ -252,4 +253,6 @@
         }
         return elemento;
     }
+
+
 })(this||{});
