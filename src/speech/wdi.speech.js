@@ -105,8 +105,8 @@
             if(speechCtrl.config) {
                 speechCtrl.config.paused = true;
             }
-            return speechSynthesis.pause();
             isPlayCtrlToogleEvent(false);
+            return speechSynthesis.pause();
         }
 
         function wdiStop() {
