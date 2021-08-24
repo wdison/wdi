@@ -199,7 +199,7 @@
                 msgConfig.rate = elementsCtrl.rate.value / 10;
                 msgConfig.pitch = elementsCtrl.pitch.value / 50;
             }else if(/Android|webOS|Opera Mini/i.test(navigator.userAgent)) {
-                msgConfig.rate = elementsCtrl.rate.value / 20;
+                msgConfig.rate = elementsCtrl.rate.value / 10;
                 msgConfig.pitch = elementsCtrl.pitch.value / 50;
             }else if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
                 msgConfig.rate = elementsCtrl.rate.value / 80;
