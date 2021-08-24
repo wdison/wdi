@@ -198,6 +198,9 @@
             }else if(name.indexOf('MICROSOFT')!=-1) {
                 msgConfig.rate = elementsCtrl.rate.value / 10;
                 msgConfig.pitch = elementsCtrl.pitch.value / 50;
+            }else if(/Android|webOS|iPhone|iPad|iPod|Opera Mini/i.test(navigator.userAgent)) {
+                msgConfig.rate = elementsCtrl.rate.value / 50;
+                msgConfig.pitch = elementsCtrl.pitch.value / 50;
             } else {
                 console.log('Rate and Pitch only work with native voice.');
                 msgConfig.rate = -1;
