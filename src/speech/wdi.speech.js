@@ -48,7 +48,8 @@
             resume: wdiResume,
             play: wdiPlay,
             configVoice: wdiConfigVoice,
-            config: undefined
+            config: undefined,
+            setText: wdiSetText
         }
 
 
@@ -188,7 +189,7 @@
 
             /*TODO implementar volume*/
             msgConfig.lang = msgConfig.voice.lang;
-            msgConfig.voice.default = true;                
+            msgConfig.voice.default = true;
 
             var name = msgConfig.voice.name.toUpperCase();
             if(name.indexOf('GOOGLE')!=-1) {
@@ -201,6 +202,12 @@
                 console.log('Rate and Pitch only work with native voice.');
                 msgConfig.rate = -1;
                 msgConfig.pitch = -1;
+            }
+        }
+
+        function wdiSetText(text){
+            if(text){
+                conf.text = text;
             }
         }
 
