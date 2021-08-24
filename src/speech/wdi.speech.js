@@ -202,7 +202,7 @@
                 msgConfig.rate = elementsCtrl.rate.value / 10;
                 msgConfig.pitch = elementsCtrl.pitch.value / 50;
             }else if(/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-                msgConfig.rate = elementsCtrl.rate.value / 80;
+                msgConfig.rate = elementsCtrl.rate.value / 65;
                 msgConfig.pitch = elementsCtrl.pitch.value / 50;
             } else {
                 console.log('Rate and Pitch only work with native voice.');
