@@ -111,14 +111,14 @@
         }
 
         function wdiStop() {
-            speechSynthesis.cancel();
+            if(speechSynthesis) speechSynthesis.cancel();
             speechCtrl.config = undefined;
             isPlayCtrlToogleEvent(false);
         }
 
         function wdiResume() {
             var progress_index = speechCtrl.config.progress_index||0;
-            var text = speechCtrl.config.text;
+            var text = conf.text;
             reInitPlaySpeech(text, progress_index);
         }
 
