@@ -103,17 +103,17 @@
         }
 
         function wdiPause() {
-            speechCtrl.config&&speechCtrl.config.paused = true;
+            if(speechCtrl.config)speechCtrl.config.paused = true;
             isPlayCtrlToogleEvent(false);
-            conf.on.pause&&conf.on.pause();
-            speechSynthesis&&speechSynthesis.pause();
+            if(conf.on.pause)conf.on.pause();
+            if(speechSynthesis)speechSynthesis.pause();
         }
 
         function wdiStop() {
-            speechSynthesis&&speechSynthesis.cancel();
+            if(speechSynthesis)speechSynthesis.cancel();
             speechCtrl.config = undefined;
             isPlayCtrlToogleEvent(false);
-            conf.on.stop&&conf.on.stop();
+            if(conf.on.stop)conf.on.stop();
         }
 
         function wdiResume() {
@@ -127,14 +127,14 @@
                 if(speechCtrl.config.paused) {
                     /*pretencao: 'speechCtrl.resume();'*/
                     speechCtrl.resume();
-                    conf.on.play&&conf.on.play();
+                    if(conf.on.play)conf.on.play();
                 } else {
                     console.log('áudio em andamento!');
                 }
             }else{
                 var msgConfig = configMsgConfig();
                 speechSynthesis.speak(msgConfig);
-                conf.on.play&&conf.on.play();
+                if(conf.on.play)conf.on.play();
             }
             isPlayCtrlToogleEvent(true);
         }
