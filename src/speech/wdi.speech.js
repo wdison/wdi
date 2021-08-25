@@ -3,7 +3,7 @@
     wdi.Speech = wdi.Speech || initializerSpeechFunction
 
     function initializerSpeechFunction(confInput){
-        var defaultConf = {'id':'idSpeech','el':undefined,'text':undefined};
+        var defaultConf = {'id':'idSpeech','el':undefined,'text':undefined,on:{'play':undefined,'stop':undefined,'pause':undefined}};
         var conf = {};
         conf = Object.assign(conf,defaultConf);
         conf = Object.assign(conf,confInput);
@@ -103,17 +103,17 @@
         }
 
         function wdiPause() {
-            if(speechCtrl.config) {
-                speechCtrl.config.paused = true;
-            }
+            speechCtrl.config&&speechCtrl.config.paused = true;
             isPlayCtrlToogleEvent(false);
-            return speechSynthesis.pause();
+            conf.on.pause&&conf.on.pause();
+            speechSynthesis&&speechSynthesis.pause();
         }
 
         function wdiStop() {
-            if(speechSynthesis) speechSynthesis.cancel();
+            speechSynthesis&&speechSynthesis.cancel();
             speechCtrl.config = undefined;
             isPlayCtrlToogleEvent(false);
+            conf.on.stop&&conf.on.stop();
         }
 
         function wdiResume() {
@@ -127,12 +127,14 @@
                 if(speechCtrl.config.paused) {
                     /*pretencao: 'speechCtrl.resume();'*/
                     speechCtrl.resume();
+                    conf.on.play&&conf.on.play();
                 } else {
                     console.log('áudio em andamento!');
                 }
             }else{
                 var msgConfig = configMsgConfig();
                 speechSynthesis.speak(msgConfig);
+                conf.on.play&&conf.on.play();
             }
             isPlayCtrlToogleEvent(true);
         }
