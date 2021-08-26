@@ -113,7 +113,6 @@
             if(speechSynthesis)speechSynthesis.cancel();
             speechCtrl.config = undefined;
             isPlayCtrlToogleEvent(false);
-            if(conf.on.stop)conf.on.stop();
         }
 
         function wdiResume() {
@@ -160,6 +159,7 @@
                 elementsCtrl.progress.value = msgConfig.origTextLength;
                 speechCtrl.config = undefined;
                 speechCtrl.stop();
+                if(conf.on.stop)conf.on.stop();
             };
 
             msgConfig.onboundary = function( e ) {
