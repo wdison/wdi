@@ -213,9 +213,17 @@
             }
         }
 
-        function wdiSetText(text){
+        function wdiSetText(text, rate, pitch){
             if(text){
                 conf.text = text;
+            }
+            if(rate){
+                conf.rate = rate;
+                elementsCtrl.rate.value = rate;
+            }
+            if(pitch){
+                conf.pitch = pitch;
+                elementsCtrl.pitch.value = pitch;
             }
         }
 
