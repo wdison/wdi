@@ -3,20 +3,67 @@ Exemplo para incluir em qualquer site
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// INICIO EXEMPLO DE INCLUSÂO A PAGINA ///////////////////////
-var wdiSpeech = undefined;
-
-function createDivId(idStr){
-    var _divId = document.createElement('div');
-    _divId.setAttribute('id', idStr);
-    document.body.append(_divId);
+var _script = document.createElement('script');
+_script.type = 'text/javascript';
+_script.onload = function() {
+    _OnLoadByConsole({id:undefined, classe:undefined});
 }
 
-function _OnLoad(){
+_script.setAttribute('src','https://wdison.github.io/wdi/src/speech/wdi.speech.js');
+document.head.append(_script);
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// FIM EXEMPLO DE INCLUSÂO A PAGINA ///////////////////////
+*/
+
+
+
+function _OnLoadByConsole(conf){
+    window.wdiSpeech = undefined;
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////// INICIO EXEMPLO DE INCLUIR TEXTO PARA LEITURA ///////////////////////
+    function playText(text){
+        //wdiSpeech.setText(a.innerText, 95);
+        wdiSpeech.setText(text, 95);
+        wdiSpeech.stop();
+        setTimeout(function(){
+            wdiSpeech.play();
+        },200);
+    }
+
+    function incluirTexto_E_Play(conf){
+        conf = conf || {};
+        setTimeout(function(){
+
+            //Por classe
+            if(conf.classe){
+                var e = document.getElementsByClassName(conf.classe)[0];
+                playText(e.innerText);
+            }
+
+            //Por ID
+            if(conf.id){
+                var e = document.getElementById(conf.id);
+                playText(e.innerText);
+            }
+        }, 3000);
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////// FIM EXEMPLO DE INCLUIR TEXTO PARA LEITURA ///////////////////////
+
+    function createDivId(idStr){
+        var _divId = document.createElement('div');
+        _divId.setAttribute('id', idStr);
+        _divId.style.position = 'fixed';
+        _divId.style.bottom = '10px';
+        _divId.style.left = '10px';
+        _divId.style.backgroundColor = '#c8c8c8a1';
+        document.body.append(_divId);
+    }
     let idSpeechContainer = 'speechContainer';
     createDivId(idSpeechContainer);
 
     let param = {id:idSpeechContainer,text:'Audio configurado!'}
-    wdiSpeech = window['wdi'].Speech(param);
+    window.wdiSpeech = window['wdi'].Speech(param);
 
     // wdiSpeech.setText(this.card.message);
     // wdiSpeech.stop();
@@ -24,42 +71,12 @@ function _OnLoad(){
     setTimeout(function(){
         wdiSpeech.play();
     },10);
+
+    //incluirTexto_E_Play({id:undefined, classe:undefined})
+    incluirTexto_E_Play(conf)
 }
 
 
-var _script = document.createElement('script');
-_script.type = 'text/javascript';
-_script.onload = function() {
-    _OnLoad();
-}
-
-_script.setAttribute('src','https://wdison.github.io/wdi/src/speech/wdi.speech.js');
-document.head.append(_script);
-////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////// FIM EXEMPLO DE INCLUSÂO A PAGINA ///////////////////////
-
-////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////// INICIO EXEMPLO DE INCLUIR TEXTO PARA LEITURA ///////////////////////
-setTimeout(function(){
-    function playText(text){
-        //wdiSpeech.setText(a.innerText, 95);
-        wdiSpeech.setText(text, 95);
-        setTimeout(function(){
-            wdiSpeech.play();
-        },200);
-    }
-
-    //Por classe
-    var e = document.getElementsByClassName('post-single-content')[0];
-    playText(e.innerText);
-
-    //Por ID
-    var e = document.getElementById('idAttribute');
-    playText(e.innerText);
-}, 3000);
-////////////////////////////////////////////////////////////////////////////////////////////
-/////////////////////// FIM EXEMPLO DE INCLUIR TEXTO PARA LEITURA ///////////////////////
-*/
 
 (function(global) {
     var wdi = global.wdi = global.wdi || {};
