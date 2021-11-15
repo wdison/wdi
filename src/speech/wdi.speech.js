@@ -1,3 +1,56 @@
+/*
+Exemplo para incluir em qualquer site
+
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// INICIO EXEMPLO DE INCLUSÂO A PAGINA ///////////////////////
+var wdiSpeech = undefined;
+
+function createDivId(idStr){
+    var _divId = document.createElement('div');
+    _divId.setAttribute('id', idStr);
+    document.body.append(_divId);
+}
+
+function _OnLoad(){
+    let idSpeechContainer = 'speechContainer';
+    createDivId(idSpeechContainer);
+
+    let param = {id:idSpeechContainer,text:'Audio configurado!'}
+    wdiSpeech = window['wdi'].Speech(param);
+
+    // wdiSpeech.setText(this.card.message);
+    // wdiSpeech.stop();
+    
+    setTimeout(function(){
+        wdiSpeech.play();
+    },10);
+}
+
+
+var _script = document.createElement('script');
+_script.type = 'text/javascript';
+_script.onload = function() {
+    _OnLoad();
+}
+
+_script.setAttribute('src','https://wdison.github.io/wdi/src/speech/wdi.speech.js');
+document.head.append(_script);
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// FIM EXEMPLO DE INCLUSÂO A PAGINA ///////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// INICIO EXEMPLO DE INCLUIR TEXTO PARA LEITURA ///////////////////////
+setTimeout(function(){
+    var a = document.getElementsByClassName('post-single-content')[0];
+    wdiSpeech.setText(a.innerText, 95);
+    setTimeout(function(){
+        wdiSpeech.play();
+    },200);
+}, 3000);
+////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////// FIM EXEMPLO DE INCLUIR TEXTO PARA LEITURA ///////////////////////
+*/
+
 (function(global) {
     var wdi = global.wdi = global.wdi || {};
     wdi.Speech = wdi.Speech || initializerSpeechFunction
