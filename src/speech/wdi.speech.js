@@ -41,11 +41,21 @@ document.head.append(_script);
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// INICIO EXEMPLO DE INCLUIR TEXTO PARA LEITURA ///////////////////////
 setTimeout(function(){
-    var a = document.getElementsByClassName('post-single-content')[0];
-    wdiSpeech.setText(a.innerText, 95);
-    setTimeout(function(){
-        wdiSpeech.play();
-    },200);
+    function playText(text){
+        //wdiSpeech.setText(a.innerText, 95);
+        wdiSpeech.setText(text, 95);
+        setTimeout(function(){
+            wdiSpeech.play();
+        },200);
+    }
+
+    //Por classe
+    var e = document.getElementsByClassName('post-single-content')[0];
+    playText(e.innerText);
+
+    //Por ID
+    var e = document.getElementById('idAttribute');
+    playText(e.innerText);
 }, 3000);
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// FIM EXEMPLO DE INCLUIR TEXTO PARA LEITURA ///////////////////////
