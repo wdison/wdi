@@ -54,8 +54,10 @@ function _OnLoadByConsole(conf){
         var _divId = document.createElement('div');
         _divId.setAttribute('id', idStr);
         _divId.style.position = 'fixed';
-        _divId.style.bottom = '10px';
-        _divId.style.left = '10px';
+        // _divId.style.width = '100%';
+        _divId.style.padding = '8px 5px 10px 15px';
+        _divId.style.bottom = '0px';
+        _divId.style.left = '0px';
         _divId.style.backgroundColor = '#c8c8c8a1';
         document.body.append(_divId);
     }
