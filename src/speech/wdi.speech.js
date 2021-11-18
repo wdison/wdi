@@ -37,32 +37,41 @@ function _OnLoadByConsole(conf){
             //Por classe
             if(conf.classe){
                 var e = document.getElementsByClassName(conf.classe)[0];
-                playText(e.innerText);
+                if(e)
+                    playText(e.innerText);
+                else
+                    playText('Não foi encontrado nenhuma classe '+conf.classe);
             }
 
             //Por ID
             if(conf.id){
                 var e = document.getElementById(conf.id);
-                playText(e.innerText);
+                if(e)
+                    playText(e.innerText);
+                else
+                    playText('Não foi encontrado nenhum ID '+conf.id);
             }
         }, 3000);
     }
     ////////////////////////////////////////////////////////////////////////////////////////////
     /////////////////////// FIM EXEMPLO DE INCLUIR TEXTO PARA LEITURA ///////////////////////
 
-    function createDivId(idStr){
-        var _divId = document.createElement('div');
-        _divId.setAttribute('id', idStr);
-        _divId.style.position = 'fixed';
-        // _divId.style.width = '100%';
-        _divId.style.padding = '8px 5px 10px 15px';
-        _divId.style.bottom = '0px';
-        _divId.style.left = '0px';
-        _divId.style.backgroundColor = '#c8c8c8a1';
-        document.body.append(_divId);
+    function createSpeechContainer(idStr){
+        var _divId = document.getElementById(idStr);
+        if(!_divId){
+            _divId = document.createElement('div');
+            _divId.setAttribute('id', idStr);
+            _divId.style.position = 'fixed';
+            // _divId.style.width = '100%';
+            _divId.style.padding = '8px 5px 10px 15px';
+            _divId.style.bottom = '0px';
+            _divId.style.left = '0px';
+            _divId.style.backgroundColor = '#c8c8c8a1';
+            document.body.append(_divId);
+        }
     }
     let idSpeechContainer = 'speechContainer';
-    createDivId(idSpeechContainer);
+    createSpeechContainer(idSpeechContainer);
 
     let param = {id:idSpeechContainer,text:'Audio configurado!'}
     window.wdiSpeech = window['wdi'].Speech(param);
