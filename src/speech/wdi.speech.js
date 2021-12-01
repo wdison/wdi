@@ -3,14 +3,13 @@ Exemplo para incluir em qualquer site
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// INICIO EXEMPLO DE INCLUSÂO A PAGINA ///////////////////////
-var _script = document.createElement('script');
-_script.type = 'text/javascript';
-_script.onload = function() {
-    _OnLoadByConsole({id:undefined, classe:undefined});
+function init(o){var i = undefined;o=o||{id:i, classe:i};
+    var e = document.createElement('script');e.type = 'text/javascript';
+    e.onload = function() {_OnLoadByConsole({id:o.id, classe:o.classe});}
+    e.setAttribute('src','https://wdison.github.io/wdi/src/speech/wdi.speech.js');
+    document.head.append(e);
 }
-
-_script.setAttribute('src','https://wdison.github.io/wdi/src/speech/wdi.speech.js');
-document.head.append(_script);
+init({id:undefined, classe:undefined});
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// FIM EXEMPLO DE INCLUSÂO A PAGINA ///////////////////////
 */
