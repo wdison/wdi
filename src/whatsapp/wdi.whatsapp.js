@@ -20,27 +20,49 @@ init(conf);
 */
 
 function _OnLoadWhatsApp(conf){
+    var defaultConf = {phone:'5511934762114',
+                        textToSend:'Olá, tudo bem? Tenho uma dúvida.',
+                        textInit:'Iniciar a conversa',
+                        tooltip:'Dúvidas? Fala com um atendente agora!',
+                        title:'Equipe de Suporte',
+                        textChat:'OI!<br>Como posso te ajudar?'
+                      };
+    conf = Object.assign(defaultConf,conf);
+
+
     var container = document.getElementById('wdi-whatsapp-container');
-    container.innerHTML = container.innerHTML + '<div class="joinchat joinchat--right joinchat--show" data-settings="{&quot;telephone&quot;:&quot;5511934762114&quot;,&quot;mobile_only&quot;:false,&quot;button_delay&quot;:3,&quot;whatsapp_web&quot;:false,&quot;message_views&quot;:2,&quot;message_delay&quot;:10,&quot;message_badge&quot;:false,&quot;message_send&quot;:&quot;Gostaria de saber como funciona o curso de alongamento de unhas.&quot;,&quot;message_hash&quot;:&quot;e998546b&quot;}" style="--peak:url(\#joinchat__message__peak);">'
+    container.innerHTML = container.innerHTML + '<div class="joinchat joinchat--right joinchat--show" data-settings="{&quot;telephone&quot;:&quot;'
+    +conf.phone
+    +'&quot;,&quot;mobile_only&quot;:false,&quot;button_delay&quot;:3,&quot;whatsapp_web&quot;:false,&quot;message_views&quot;:2,&quot;message_delay&quot;:10,&quot;message_badge&quot;:false,&quot;message_send&quot;:&quot;'
+    + conf.textToSend
+    +'&quot;,&quot;message_hash&quot;:&quot;e998546b&quot;}" style="--peak:url(\#joinchat__message__peak);">'
     + '  <div class="chat-circle"></div>'
     + '    <div class="chat-circle-fill"></div>'
     + '    <div class="joinchat__button">'
     + '    <div class="joinchat__button__open"></div>'
-    + '                <div class="joinchat__button__sendtext">Iniciar a conversa</div>'
+    + '                <div class="joinchat__button__sendtext">'
+    + conf.textInit
+    + '</div>'
     + '              <svg class="joinchat__button__send" viewBox="0 0 400 400" stroke-linecap="round" stroke-width="33">'
     + '        <path class="joinchat_svg__plain" d="M168.83 200.504H79.218L33.04 44.284a1 1 0 0 1 1.386-1.188L365.083 199.04a1 1 0 0 1 .003 1.808L34.432 357.903a1 1 0 0 1-1.388-1.187l29.42-99.427"></path>'
     + '        <path class="joinchat_svg__chat" d="M318.087 318.087c-52.982 52.982-132.708 62.922-195.725 29.82l-80.449 10.18 10.358-80.112C18.956 214.905 28.836 134.99 81.913 81.913c65.218-65.217 170.956-65.217 236.174 0 42.661 42.661 57.416 102.661 44.265 157.316"></path>'
     + '      </svg>'
-    + '                  <div class="joinchat__tooltip"><div>Dúvidas? Fala com a um atendente agora!</div></div>'
+    + '                  <div class="joinchat__tooltip"><div>'
+    + conf.tooltip
+    + '</div></div>'
     + '      </div>'
     + '      <div class="joinchat__box">'
     + '      <div class="joinchat__header">'
-    + '                  <span class="joinchat__header__text">Equipe de Suporte - Paola Chaves</span>'
+    + '                  <span class="joinchat__header__text">'
+    + conf.title
+    + '</span>'
     + '                <div class="joinchat__close" aria-label="Close"></div>'
     + '      </div>'
     + '      <div class="joinchat__box__scroll">'
     + '        <div class="joinchat__box__content">'
-    + '          <div class="joinchat__message">OI!<br>Como posso te ajudar?</div>       </div>'
+    + '          <div class="joinchat__message">'
+    + conf.textChat
+    + '</div>       </div>'
     + '      </div>'
     + '    </div>'
     + '    <svg height="0" width="0"><defs><clipPath id="joinchat__message__peak"><path d="M17 25V0C17 12.877 6.082 14.9 1.031 15.91c-1.559.31-1.179 2.272.004 2.272C9.609 18.182 17 18.088 17 25z"></path></clipPath></defs></svg>'
