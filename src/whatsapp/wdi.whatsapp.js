@@ -1,24 +1,26 @@
 /*
-<link rel="stylesheet" id="wdi-whatsapp-css" href="/css/wdi.whatsapp.css" media="all">
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="wdi.whatsapp.js" id="wdi-whatsapp-js"></script>
-
 function init(conf){
     var d = document.createElement('div');
-    d.innerHTML = '<link rel="stylesheet" id="wdi-whatsapp-css" href="https://wdison.github.io/wdi/src/whatsapp/wdi.whatsapp.css" media="all">'
-                +'<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>'
-                +'<script src="https://wdison.github.io/wdi/src/whatsapp/wdi.whatsapp.js" id="wdi-whatsapp-js"></script>';
-
+    d.innerHTML = '<link rel="stylesheet" id="wdi-whatsapp-css" href="https://wdison.github.io/wdi/src/whatsapp/wdi.whatsapp.css" media="all">';
     d.setAttribute('id','wdi-whatsapp-container');
-    d.onload = function() {_OnLoadWhatsApp(conf);}
     document.body.append(d);
+
+
+    var e = document.createElement('script');e.type = 'text/javascript';
+    e.setAttribute('src','https://code.jquery.com/jquery-3.5.1.slim.min.js');
+    document.body.append(e);
+
+    e = document.createElement('script');e.type = 'text/javascript';
+    e.onload = function() {setTimeout(function(){_OnLoadWhatsApp(conf);}, 1000);}
+    e.setAttribute('src','https://wdison.github.io/wdi/src/whatsapp/wdi.whatsapp.js');
+    document.body.append(e);
 }
 var conf = {}
 init(conf);
 */
 
 function _OnLoadWhatsApp(conf){
-    var container = document.getElementById(wdi-whatsapp-container);
+    var container = document.getElementById('wdi-whatsapp-container');
     container.innerHTML = container.innerHTML + '<div class="joinchat joinchat--right joinchat--show" data-settings="{&quot;telephone&quot;:&quot;5511934762114&quot;,&quot;mobile_only&quot;:false,&quot;button_delay&quot;:3,&quot;whatsapp_web&quot;:false,&quot;message_views&quot;:2,&quot;message_delay&quot;:10,&quot;message_badge&quot;:false,&quot;message_send&quot;:&quot;Gostaria de saber como funciona o curso de alongamento de unhas.&quot;,&quot;message_hash&quot;:&quot;e998546b&quot;}" style="--peak:url(\#joinchat__message__peak);">'
     + '  <div class="chat-circle"></div>'
     + '    <div class="chat-circle-fill"></div>'
