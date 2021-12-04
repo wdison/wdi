@@ -35,7 +35,6 @@ function _OnLoadWhatsApp(conf){
                       };
     conf = Object.assign(defaultConf,conf);
 
-
     var container = document.getElementById('wdi-whatsapp-container');
     container.innerHTML = container.innerHTML + '<div class="joinchat joinchat--right joinchat--show" data-settings="{&quot;telephone&quot;:&quot;'
     +conf.phone
