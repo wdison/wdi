@@ -15,12 +15,13 @@ function init(conf){
     e.setAttribute('src','https://wdison.github.io/wdi/src/whatsapp/wdi.whatsapp.js');
     document.body.append(e);
 }
+var nomeAtendente = 'Wdison'
 var conf = {phone:'5511983150718',
-                        textToSend:'Olá Wdison, tudo bem? Quero que você seja muito abençoado.',
+                        textToSend:`Olá ${nomeAtendente}, tudo bem? Quero saber mais detalhes sobre seus serviços.`,
                         textInit:'Enviar msg',
-                        tooltip:'Dúvidas? Fala comigo agora!',
-                        title:'Equipe de Suporte da Pousada',
-                        textChat:'OI!<br>Como posso te ajudar? Sou Wdison'
+                        tooltip:'Dúvidas? Fala comigo aqui!',
+                        title:'Faço Parte da Equipe de Suporte',
+                        textChat:`Oi!<br>Como posso te ajudar? <br>Sou ${nomeAtendente}`
                       }
 init(conf);
 */
