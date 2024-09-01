@@ -9,7 +9,7 @@ function init(o){var i = undefined;o=o||{id:i, classe:i};
     e.setAttribute('src','https://wdison.github.io/wdi/src/speech/wdi.speech.js');
     document.head.append(e);
 }
-init({id:undefined, classe:undefined});
+init();
 ////////////////////////////////////////////////////////////////////////////////////////////
 /////////////////////// FIM EXEMPLO DE INCLUSÂO A PAGINA ///////////////////////
 */
