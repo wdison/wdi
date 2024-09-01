@@ -107,6 +107,7 @@ function _OnLoadByConsole(conf){
         } else {
             //TODO create ctrls here
             elSpeechContainer.innerHTML = '<div class="speechMedia">'
+                                          +'      <span class=toogleGetContent ><svg xmlns="http://www.w3.org/2000/svg" style="width: 1em;" aria-hidden="true" focusable="false" viewBox="0 0 448 512"><path d="M256 464c114.9 0 208-93.1 208-208s-93.1-208-208-208S48 141.1 48 256c0 5.5 .2 10.9 .6 16.3L1.8 286.1C.6 276.2 0 266.2 0 256C0 114.6 114.6 0 256 0S512 114.6 512 256s-114.6 256-256 256c-10.2 0-20.2-.6-30.1-1.8l13.8-46.9c5.4 .4 10.8 .6 16.3 .6zm-2.4-48l14.3-48.6C324.2 361.4 368 313.8 368 256c0-61.9-50.1-112-112-112c-57.8 0-105.4 43.8-111.4 100.1L96 258.4c0-.8 0-1.6 0-2.4c0-88.4 71.6-160 160-160s160 71.6 160 160s-71.6 160-160 160c-.8 0-1.6 0-2.4 0zM39 308.5l204.8-60.2c12.1-3.6 23.4 7.7 19.9 19.9L203.5 473c-4.1 13.9-23.2 15.6-29.7 2.6l-28.7-57.3c-.7-1.3-1.5-2.6-2.5-3.7l-88 88c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3l88-88c-1.1-1-2.3-1.9-3.7-2.5L36.4 338.2c-13-6.5-11.3-25.6 2.6-29.7z"></path></svg></span>'
                                           +'      <span class=speechMediaPlay ><svg xmlns="http://www.w3.org/2000/svg" style="width: 1em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="play" class="svg-inline--fa fa-play fa-w-14" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"></path></svg></span>'
                                           +'      <span class=speechMediaPause style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" style="width: 1em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="pause" class="svg-inline--fa fa-pause fa-w-14" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M144 479H48c-26.5 0-48-21.5-48-48V79c0-26.5 21.5-48 48-48h96c26.5 0 48 21.5 48 48v352c0 26.5-21.5 48-48 48zm304-48V79c0-26.5-21.5-48-48-48h-96c-26.5 0-48 21.5-48 48v352c0 26.5 21.5 48 48 48h96c26.5 0 48-21.5 48-48z"></path></svg></span>'
                                           +'      <span class=speechMediaStop ><svg xmlns="http://www.w3.org/2000/svg" style="width: 1em;" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="stop" class="svg-inline--fa fa-stop fa-w-14" role="img" viewBox="0 0 448 512"><path fill="currentColor" d="M400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48z"></path></svg></span>'
@@ -118,8 +119,9 @@ function _OnLoadByConsole(conf){
                                           +'      <label>Rate: <input class=speechConfRate type="range" min="1" value="40" step="1" max="100"></label><br>'
                                           +'      <label>Pitch: <input class=speechConfPitch type="range" min="0" value="50" step="1" max="100"></label>'
                                           +'</div>';
-            
+
             elementsCtrl.container = elSpeechContainer;
+            elementsCtrl.toogleGetContent = elementsCtrl.container.querySelector('.toogleGetContent');
             elementsCtrl.play = elementsCtrl.container.getElementsByClassName('speechMediaPlay')[0];
             elementsCtrl.pause = elementsCtrl.container.getElementsByClassName('speechMediaPause')[0];
             elementsCtrl.stop = elementsCtrl.container.getElementsByClassName('speechMediaStop')[0];
@@ -139,7 +141,8 @@ function _OnLoadByConsole(conf){
             play: wdiPlay,
             configVoice: wdiConfigVoice,
             config: undefined,
-            setText: wdiSetText
+            setText: wdiSetText,
+            toogleGetContent: wdiToogleGetContent
         }
 
 
@@ -148,6 +151,7 @@ function _OnLoadByConsole(conf){
 
         setTimeout(function(){
             voicesPopulate();
+            elementsCtrl.toogleGetContent.addEventListener('click', speechCtrl.toogleGetContent);
             elementsCtrl.play.addEventListener('click', speechCtrl.play);
             elementsCtrl.pause.addEventListener('click', speechCtrl.pause);
             elementsCtrl.stop.addEventListener('click', speechCtrl.stop);
@@ -226,6 +230,75 @@ function _OnLoadByConsole(conf){
                 if(conf.on.play)conf.on.play();
             }
             isPlayCtrlToogleEvent(true);
+        }
+        
+        function wdiToogleGetContent(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (speechCtrl.isGettingContent) {
+                speechCtrl.isGettingContent = false;
+                elementsCtrl.toogleGetContent.firstChild.style.fill = 'black';
+                
+                // Remove event listeners de todos os elementos quando isGettingContent for false
+                document.querySelectorAll('*').forEach(element => {
+                    element.removeEventListener('mouseover', handleMouseOver);
+                    element.removeEventListener('click', handleClick);
+                });
+            } else {
+                speechCtrl.isGettingContent = true;
+                elementsCtrl.toogleGetContent.firstChild.style.fill = 'blue';
+                
+                // Adicionar event listeners a todos os elementos
+                document.querySelectorAll('*').forEach(element => {
+                    element.addEventListener('mouseover', handleMouseOver);
+                    element.addEventListener('click', handleClick);
+                });
+                elementsCtrl.container.removeEventListener('mouseover', handleMouseOver);
+                elementsCtrl.container.removeEventListener('click', handleClick);
+                elementsCtrl.container.querySelectorAll('*').forEach(element => {
+                    element.removeEventListener('mouseover', handleMouseOver);
+                    element.removeEventListener('click', handleClick);
+                });
+            }
+        }
+        
+        // Função para realçar o elemento com mouseover
+        function handleMouseOver(event) {
+            // Remover realce de todos os elementos
+            document.querySelectorAll('*').forEach(element => {
+                element.style.outline = '';
+                delete element.style.cursor;
+            });
+            
+            // Aplicar realce ao elemento atual
+            event.target.style.outline = '2px solid red';
+            event.target.style.cursor = 'pointer';
+        }
+        
+        // Função para capturar o innerText do elemento ao clicar
+        function handleClick(event) {
+            event.preventDefault(); // Prevenir o comportamento padrão do clique
+            event.stopPropagation();
+            const textContent = event.target.innerText;
+            // console.log('Texto capturado:', textContent);
+            
+            // Opcional: você pode parar de capturar depois do clique
+            speechCtrl.isGettingContent = false;
+            elementsCtrl.toogleGetContent.firstChild.style.fill = 'black';
+            document.querySelectorAll('*').forEach(element => {
+                element.removeEventListener('mouseover', handleMouseOver);
+                element.removeEventListener('click', handleClick);
+                element.style.outline = '';
+                delete element.style.cursor;
+            });
+
+            if(textContent){
+                speechCtrl.setText(textContent);
+                speechCtrl.stop();
+                setTimeout(function(){
+                    speechCtrl.play();
+                },200);
+            }
         }
 
         function configMsgConfig(){
